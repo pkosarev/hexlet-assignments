@@ -2,33 +2,28 @@ package exercise;
 
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 // BEGIN
 class App {
     public static boolean scrabble(String symbols, String word) {
-        var anyWord = word.toLowerCase();
-        char[] symbolsArray = symbols.toCharArray();
-        char[] wordArray = anyWord.toCharArray();
-        List<Character> listSymbols = new ArrayList<>();
-        List<Character> listWord = new ArrayList<>();
 
-        for (char w: wordArray) {
-            listWord.add(w);
-        }
-        for (char s: symbolsArray) {
-            if (listWord.contains(s)) {
-                listSymbols.add(s);
-            }
-        }
-        for (char c: listWord) {
-            if (listSymbols.contains(c)) {
-                listSymbols.remove(c);
-            } else {
+
+        int length = word.length();
+        String[] letters = symbols.split("");
+        ArrayList coll = new ArrayList(Arrays.asList(letters));
+
+        for (int i = 0; i < length; i++) {
+            String current = word.substring(i, i + 1).toLowerCase();
+
+            if (!coll.contains(current)) {
                 return false;
             }
+
+            coll.remove(current);
         }
-        return listSymbols.isEmpty();
+
+        return true;
     }
 }
 //END
